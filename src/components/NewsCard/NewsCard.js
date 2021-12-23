@@ -9,21 +9,25 @@ import {
   Typography,
 } from "@material-ui/core";
 
+import useStyle from "./style.js"; // useStyle is work as hook
+
 const NewsCard = ({
   article: { description, publishedAt, source, title, url, urlToImage },
   i,
 }) => {
+  const classes = useStyle();
   return (
     // this is card from Material UI
-    <Card>
-      <CardActionArea>
+    <Card className={classes.card}>
+      <CardActionArea href={url} target="_blank">
         <CardMedia
+          className={classes.media}
           image={
             urlToImage ||
             "https://videohive.img.customer.envatousercontent.com/files/350344331/news%20preview.jpg?auto=compress%2Cformat&fit=crop&crop=top&max-h=8000&max-w=590&s=de01da4b4ebc1de8271edcae293ef3ab"
           }
         />
-        <div>
+        <div className={classes.details}>
           {/* Publish Date Date  */}
           <Typography variant="body2" color="textSecondary" component="h2">
             {new Date(publishedAt).toDateString()}
@@ -34,7 +38,7 @@ const NewsCard = ({
           </Typography>
         </div>
         {/* Title of the news */}
-        <Typography gutterBottom varieent="h5">
+        <Typography gutterBottom varieent="h5" className={classes.title}>
           {title}
         </Typography>
         <CardContent>
@@ -45,14 +49,14 @@ const NewsCard = ({
         </CardContent>
       </CardActionArea>
 
-      <CardActionArea>
+      <CardActions className={classes.cardActions}>
         <Button size="small" color="primary">
           Learn More
         </Button>
         <Typography variant="h5" color="textSecondary">
           {i + 1}
         </Typography>
-      </CardActionArea>
+      </CardActions>
     </Card>
   );
 };
