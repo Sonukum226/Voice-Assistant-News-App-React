@@ -15,6 +15,7 @@ const App = () => {
       onCommand: ({ command, articles }) => {
         if (command === "newHeadlines") {
           console.log(articles);
+          setNewsAtricle(articles);
         }
       },
     });
