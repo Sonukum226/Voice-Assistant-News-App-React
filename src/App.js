@@ -3,6 +3,8 @@ import alanBtn from "@alan-ai/alan-sdk-web"; //import alan
 
 import NewsCards from "./components/NewsCards/NewsCards";
 
+import useStyle from "./styles";
+
 const alanKey =
   "744e67867fcedcf6cad640b385d656fa2e956eca572e1d8b807a3e2338fdd0dc/stage";
 
@@ -21,9 +23,16 @@ const App = () => {
     });
   }, []);
 
+  const classes = useStyle();
+
   return (
     <div>
-      <h1>Alan AI News Application</h1>
+      <div className={classes.logoContainer}>
+        <img
+          src="https://voicebot.ai/wp-content/uploads/2019/10/alan.jpg"
+          className={classes.alanLogo}
+        />
+      </div>
       <NewsCards articles={newsArticle} />
     </div>
   );
