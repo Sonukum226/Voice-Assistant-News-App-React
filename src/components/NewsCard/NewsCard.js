@@ -9,16 +9,24 @@ import {
   Typography,
 } from "@material-ui/core";
 
+import classNames from "classnames";
+
 import useStyle from "./style.js"; // useStyle is work as hook
 
 const NewsCard = ({
   article: { description, publishedAt, source, title, url, urlToImage },
   i,
+  activeArticle,
 }) => {
   const classes = useStyle();
   return (
     // this is card from Material UI
-    <Card className={classes.card}>
+    <Card
+      className={classNames(
+        classes.card,
+        activeArticle === i ? classes.activeCard : null
+      )}
+    >
       <CardActionArea href={url} target="_blank">
         <CardMedia
           className={classes.media}
