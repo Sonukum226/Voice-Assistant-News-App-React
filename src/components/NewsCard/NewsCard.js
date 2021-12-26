@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, createRef } from "react";
 import {
   Card,
   CardActions,
@@ -18,10 +18,28 @@ const NewsCard = ({
   i,
   activeArticle,
 }) => {
-  const classes = useStyle();
+  const classes = useStyle(); //coming as hook
+  const scrollToRef = (ref) => window.scroll(0, ref.current.offsetTop - 50);
+  const [elRefs, setelRefs] = useState([]);
+
+  useEffect(() => {
+    setelRefs((refs) =>
+      Array(20)
+        .fill()
+        .map((_, j) => refs[j] || createRef())
+    );
+  }, []);
+
+  useEffect(() => {
+    if (i === activeArticle && elRefs[activeArticle]) {
+      scrollToRef(elRefs[activeArticle]);
+    }
+  }, [i, activeArticle, elRefs]);
+
   return (
     // this is card from Material UI
     <Card
+      ref={elRefs[i]}
       className={classNames(
         classes.card,
         activeArticle === i ? classes.activeCard : null
